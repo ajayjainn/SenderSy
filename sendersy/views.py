@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegistrationForm
+from .models import Message
 # Create your views here.
 def home(request):
     return render(request,'index.html')
@@ -49,8 +50,14 @@ def logout_(request):
     return redirect('/') 
 
 def dashboard(request):
-    if request.user.is_authenticated:
-        return HttpResponse('Okay.')
+    if request.user.is_authenticated:   
+        context = {'msgs':request.user.messages.all()[::-1]}
+        return render(request, 'dashboard.html',context=context)
     else:
         messages.error(request,'Please sign-in to access dashboard.')
         return redirect('signin')
+
+def delMsg(request):
+    msg_id = int(request.POST.get('msg_id'))
+    Message.objects.get(pk=msg_id).delete()
+    return redirect('dashboard')

@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+<script src="https://kit.fontawesome.com/980eb2599c.js" crossorigin="anonymous"></script>
+
+<div class='container'>
+    {%for msg in msgs %}
+
+    <div class="card my-4 rounded-3 border border-dark">
+        <div class="card-body">
+
+            <h5 class="card-title">{{msg.by}}</h5>
+
+            <form method="POST" action="{%url 'delMsg'%}">
+                {%csrf_token%}
+                <input type="hidden" name='msg_id' value="{{msg.id}}">
+                <button style="float:right;" class="btn" type="submit"><i class="fas fa-trash-alt"></i></button>
+            </form>
+
+            <h6 class="card-subtitle mb-2 text-muted">Time</h6>
+            <p class="card-text">{{msg.content}}</p>
+
+        </div>
+    </div>
+
+    {%endfor%}
+</div>
+
+{%endblock%}
