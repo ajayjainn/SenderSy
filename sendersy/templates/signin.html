@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>Login</title>
+
+<style>
+    .center{
+        display:block; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+</style>
+
+{%endblock%}
+
+{%block content%}
+
+<div class='container'>
+
+    <form method='POST'>
+      {% csrf_token %}
+
+        <div class="mb-3 mt-4">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input class="form-control" id="exampleInputEmail1" name='username' placeholder="Enter your username">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input name='password' type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password">
+        </div>
+        <div class="checkbox mb-3">
+          <h6>Don't have an Account?</h6>
+          <a class="btn btn-sm btn-secondary" href="{% url 'signup' %}">Signup</a>
+      </div>
+
+        <button style='width: 200px;'type="submit" class="btn btn-primary mb-5 center">Login</button>
+  
+      </form>
+    
+</div>
+
+{%endblock%}

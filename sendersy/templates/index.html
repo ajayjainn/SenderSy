@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SenderSy Bootstrap Template - Index</title>
+  <title>SenderSy</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,12 +26,6 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: SenderSy - v2.2.0
-  * Template URL: https://bootstrapmade.com/SenderSy-free-simple-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -40,11 +34,11 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">SenderSy</a></h1>
+      <h1 class="logo mr-auto"><a href="{%url 'home'%}">SenderSy</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-      <a href="#about" class="get-started-btn scrollto">Get Started</a>
+      <a href="{%url 'signup'%}" class="get-started-btn scrollto">Get Started</a>
 
     </div>
   </header><!-- End Header -->

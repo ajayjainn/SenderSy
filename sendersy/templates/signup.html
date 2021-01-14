@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>Sign Up!</title>
+{%endblock%}
+
+{%block content%}
+<div class='container'>
+<form class="form-signin" method="POST">
+        {% csrf_token %}
+
+        <h1 class="h3 mb-3 mt-5 font-weight-normal text-center">
+            Create your Account
+        </h1>
+
+        <!-- Form Fields -->
+        
+        <label for="inputUsername" class="sr-only col-2">
+            First Name
+        </label>
+        <input type="text" id="inputUsername" class="form-control col-1" placeholder="Enter your First Name: " name="first_name" required autofocus>
+        <br>
+
+
+        <label for="inputUsername" class="sr-only">
+            User Name
+        </label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Choose a username" name="username" required autofocus>
+        <br>
+
+        <label for="inputPassword1" class="sr-only">
+            Password
+        </label>
+        <input type="password" id="inputPassword1" class="form-control" placeholder="Choose a password" name="password1" required autofocus>
+        <br>
+
+        <label for="inputPassword2" class="sr-only">
+            Password Confirmation
+        </label>
+        <input type="password" id="inputPassword2" class="form-control" placeholder="Confirm Your Password" name="password2" required autofocus>
+        <br>
+
+        <div class="checkbox mb-3">
+            <h6>Already have an Account?</h6>
+            <a class="btn btn-sm btn-secondary" href="{% url 'signin' %}"> Login </a>
+        </div>
+        <div class='text-center'>
+        <button class="btn btn-lg btn-primary btn-block mb-5 mt-2" type="submit">Create Account</button></div>
+    </form>
+
+    
+
+    
+</div>
+
+
+{%endblock%}
