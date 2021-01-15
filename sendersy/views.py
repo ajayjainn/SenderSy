@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegistrationForm
 from .models import Message
+from django.contrib.auth.models import User
 # Create your views here.
 def home(request):
     return render(request,'index.html')
@@ -51,7 +52,10 @@ def logout_(request):
 
 def dashboard(request):
     if request.user.is_authenticated:   
-        context = {'msgs':request.user.messages.all()[::-1]}
+        context = {
+            'msgs':request.user.messages.all()[::-1],
+            'link':'http://127.0.0.1:8000/newmessage/' + request.user.username
+        }
         return render(request, 'dashboard.html',context=context)
     else:
         messages.error(request,'Please sign-in to access dashboard.')
@@ -61,3 +65,24 @@ def delMsg(request):
     msg_id = int(request.POST.get('msg_id'))
     Message.objects.get(pk=msg_id).delete()
     return redirect('dashboard')
+
+def message(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        user = None
+
+    if request.method=='GET':
+        if user:
+            context = {'name':user.first_name}
+            return render(request, "newmessage.html", context=context)
+        else:
+            return HttpResponse(f"<center><h2>Sorry, {username} is not a registered user.</h2></center>")
+    
+    else:
+        message = request.POST.get('message',None)
+        by = request.POST.get('by','Anonymous')
+        if message and by:
+            Message.objects.create(content=message, to=user, by=by).save()
+            messages.success(request,f'Your message for {user.first_name} was recorded.')
+            return redirect(request.path_info)

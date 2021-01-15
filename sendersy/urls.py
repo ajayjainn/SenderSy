@@ -7,5 +7,6 @@ urlpatterns = [
     path('signup/',views.signup, name='signup'),
     path('logout/',views.logout_),
     path('dashboard/',views.dashboard, name='dashboard'),
-    path('delete_msg/',views.delMsg, name='delMsg')
+    path('delete_msg/',views.delMsg, name='delMsg'),
+    path('newmessage/<str:username>', views.message)
 ]

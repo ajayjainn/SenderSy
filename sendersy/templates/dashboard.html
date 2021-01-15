@@ -2,8 +2,35 @@
 {%load static%}
 {%block content%}
 
+
 <script src="https://kit.fontawesome.com/980eb2599c.js" crossorigin="anonymous"></script>
 
+<script>
+
+    function copyLink() {
+        var inp = document.createElement('input');
+        document.body.appendChild(inp)
+        inp.value = "{{link}}";
+        inp.select()
+        document.execCommand("copy");
+        inp.remove()
+    }
+    
+</script>
+
+<div class='container text-center mt-2'>
+    
+        <button id='copy'  onclick="copyLink()" class='btn btn-sm btn-dark me-2' data-bs-toggle="tooltip" title="Copied">
+            Copy link
+        </button>
+
+    <span class='fs-6 fw-normal me-2'> Or</span>
+
+    <a href='https://wa.me/?text=Hey there, drop a message about what you think about me anonymously. {{link}}'   class='btn'><i class="fab fa-lg fa-whatsapp"></i></a>
+
+</div>
+
+{%if msgs%}
 <div class='container'>
     {%for msg in msgs %}
 
@@ -18,7 +45,7 @@
                 <button style="float:right;" class="btn" type="submit"><i class="fas fa-trash-alt"></i></button>
             </form>
 
-            <h6 class="card-subtitle mb-2 text-muted">Time</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{msg.time}}</h6>
             <p class="card-text">{{msg.content}}</p>
 
         </div>
@@ -26,5 +53,9 @@
 
     {%endfor%}
 </div>
+{%else%}
 
+<p class="fs-1 fw-normal text-center mt-4">No messages available.</p>
+
+{%endif%}
 {%endblock%}
