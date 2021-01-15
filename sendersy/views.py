@@ -1,11 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegistrationForm
 from .models import Message
 from django.contrib.auth.models import User
-# Create your views here.
+
 def home(request):
     return render(request,'index.html')
 
@@ -63,8 +63,12 @@ def dashboard(request):
 
 def delMsg(request):
     msg_id = int(request.POST.get('msg_id'))
-    Message.objects.get(pk=msg_id).delete()
-    return redirect('dashboard')
+    messageObj = Message.objects.get(pk=msg_id)
+    if messageObj.to == request.user:
+        messageObj.delete()
+        return redirect('dashboard')
+    else:
+        return HttpResponse('Not Authenticated.')
 
 def message(request, username):
     try:
@@ -78,7 +82,6 @@ def message(request, username):
             return render(request, "newmessage.html", context=context)
         else:
             return HttpResponse(f"<center><h2>Sorry, {username} is not a registered user.</h2></center>")
-    
     else:
         message = request.POST.get('message',None)
         by = request.POST.get('by','Anonymous')

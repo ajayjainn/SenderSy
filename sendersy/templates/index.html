@@ -37,8 +37,11 @@
       <h1 class="logo mr-auto"><a href="{%url 'home'%}">SenderSy</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+      {%if user.is_authenticated%}
+      <a href="{%url 'dashboard'%}" class="get-started-btn scrollto">Dashboard</a>
+      {%else%}
       <a href="{%url 'signup'%}" class="get-started-btn scrollto">Get Started</a>
+      {%endif%}
 
     </div>
   </header><!-- End Header -->
@@ -53,7 +56,11 @@
             Anonymous Messages Online</h1>
           <h2>Create your Profile Link and Send it to all your contacts to check what do your friends think about you.</h2>
           <div class="d-flex">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            {%if user.is_authenticated%}
+            <a href="{%url 'dashboard'%}" class="btn-get-started scrollto">Get Started</a>
+            {%else%}
+            <a href="{%url 'signup'%}" class="btn-get-started scrollto">Get Started</a>
+            {%endif%}
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -136,10 +143,6 @@
         &copy; Copyright <strong><span>SenderSy</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/SenderSy-free-simple-bootstrap-template/ -->
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
