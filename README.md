@@ -1,4 +1,4 @@
-# message-sender
+# SenderSy
 Anonymous message sender
 
 https://sendersy.pythonanywhere.com/
