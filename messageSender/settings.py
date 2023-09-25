@@ -26,7 +26,7 @@ SECRET_KEY = '=32t6g&(7_i19!&rd4ihryc$gsms_996$ur3=&p+(m0w#bzav_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["sendersy.pythonanywhere.com","127.0.0.1"]
 
 
 # Application definition
@@ -120,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/assets/'
+STATIC_ROOT = '/home/sendersy/message-sender/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
